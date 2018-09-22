@@ -10,7 +10,6 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -18,26 +17,40 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
-public class SignUp extends AppCompatActivity {
+public class SignUpPat extends AppCompatActivity {
 
     private EditText etEmail;
     private EditText etPass;
     private Button btnsignUp;
+    private EditText etfName,etlName,etphone,etemergPhone,etDOB;
+
+
     private ProgressDialog progressDialog;
     private FirebaseAuth mAuth;
-    private static final String TAG = "SignUp";
-
+    private static final String TAG = "SignUpPat";
+    private DatabaseReference databaseReference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_sign_up);
+        setContentView(R.layout.activity_sign_up_pat);
 
         mAuth = FirebaseAuth.getInstance();
+        databaseReference= FirebaseDatabase.getInstance().getReference();
+
+
         progressDialog=new ProgressDialog(this);
         etEmail=(EditText)findViewById(R.id.etuEmail);
         etPass=(EditText)findViewById(R.id.etuPass);
+        etfName=(EditText)findViewById(R.id.etfName);
+        etlName=(EditText)findViewById(R.id.etlName);
+        etphone=(EditText)findViewById(R.id.etphone);
+        etemergPhone=(EditText)findViewById(R.id.etemergPhone);
+        etDOB=(EditText)findViewById(R.id.etDOB);
+
         btnsignUp=(Button)findViewById(R.id.btnsignup);
 
     }
@@ -45,7 +58,6 @@ public class SignUp extends AppCompatActivity {
     @Override
     public void onStart() {
         super.onStart();
-        // Check if user is signed in (non-null) and update UI accordingly.
         FirebaseUser currentUser = mAuth.getCurrentUser();
         //updateUI(currentUser);
     }
@@ -53,6 +65,20 @@ public class SignUp extends AppCompatActivity {
 
     public void signUp(View view) {
         registerUser();
+    }
+
+    private void saveUserInfo(FirebaseUser user){
+        String fName=etfName.getText().toString().trim();
+        String lName=etlName.getText().toString().trim();
+        int phone=Integer.parseInt(etphone.getText().toString().trim());
+        int emergphone=Integer.parseInt(etemergPhone.getText().toString().trim());
+        String email=etEmail.getText().toString().trim();
+        String DOB=etDOB.getText().toString().trim();
+
+        PatUserInformation patUserInformation=new PatUserInformation(email,fName,lName,phone,emergphone,DOB);
+        databaseReference.child(user.getUid()).setValue(patUserInformation);
+        Toast.makeText(this,"User Updates",Toast.LENGTH_SHORT).show();
+        updateUI(user);
     }
 
     private void registerUser() {
@@ -68,24 +94,25 @@ public class SignUp extends AppCompatActivity {
             return;
         }
 
-        //progressDialog.setMessage("Registering User");
-       // progressDialog.show();
+        progressDialog.setMessage("Registering User");
+        progressDialog.show();
 
         mAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            // Sign in success, update UI with the signed-in user's information
+                            progressDialog.dismiss();
                             Log.d(TAG, "createUserWithEmail:success");
-                            Toast.makeText(SignUp.this, "Registered Succesfulyl",
+                            Toast.makeText(SignUpPat.this, "Registered Succesfulyl",
                                     Toast.LENGTH_SHORT).show();
                             FirebaseUser user = mAuth.getCurrentUser();
-                            updateUI(user);
+                            saveUserInfo(user);
+
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w(TAG, "createUserWithEmail:failure", task.getException());
-                            Toast.makeText(SignUp.this, "Authentication failed.",
+                            Toast.makeText(SignUpPat.this, "Authentication failed.",
                                     Toast.LENGTH_SHORT).show();
                             //updateUI(null);
                         }

@@ -18,8 +18,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".SignUp" />
-        <activity android:name=".Home"></activity>
+        <activity android:name=".SignUpPat" />
+        <activity android:name=".Home" />
+        <activity android:name=".PickUserType" />
+        <activity android:name=".SignUpFA"></activity>
     </application>
 
 </manifest>

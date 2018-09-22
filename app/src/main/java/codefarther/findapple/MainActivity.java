@@ -1,5 +1,6 @@
 package codefarther.findapple;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -24,7 +25,7 @@ public class MainActivity extends AppCompatActivity {
     private Button btnSignIn;
     private FirebaseAuth mAuth;
     private static final String TAG = "MainActivity";
-
+    private ProgressDialog progressDialog;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,6 +34,7 @@ public class MainActivity extends AppCompatActivity {
         etPass=(EditText)findViewById(R.id.etPass);
         btnSignIn=(Button)findViewById(R.id.btnSignIn);
         mAuth = FirebaseAuth.getInstance();
+        progressDialog=new ProgressDialog(this);
     }
 
     public void signIn(View view) {
@@ -52,15 +54,20 @@ public class MainActivity extends AppCompatActivity {
             return;
         }
 
+        progressDialog.setMessage("Signing in");
+        progressDialog.show();
+
         mAuth.signInWithEmailAndPassword(email,password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if(task.isSuccessful()){
+                            progressDialog.dismiss();
                             Log.d(TAG, "signInWithEmail:success");
-                            Toast.makeText(MainActivity.this, "Success",
+                            Toast.makeText(MainActivity.this, "Welcome",
                                     Toast.LENGTH_SHORT).show();
                             FirebaseUser user = mAuth.getCurrentUser();
+                            finish();
                             updateUI(user);
                         }
                         else{
@@ -74,7 +81,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void signUp(View view) {
-        Intent intent=new Intent(this,SignUp.class);
+        Intent intent=new Intent(this,PickUserType.class);
         startActivity(intent);
     }
 
