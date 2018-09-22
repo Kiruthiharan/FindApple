@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "1037637287036",
+    "firebase_url": "https://findapple-9bcaa.firebaseio.com",
+    "project_id": "findapple-9bcaa",
+    "storage_bucket": "findapple-9bcaa.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1037637287036:android:c2dc18c762df1937",
+        "android_client_info": {
+          "package_name": "codefarther.findapple"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1037637287036-oeitekfpn9kdoqkdsnt2o93g0f1pget2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC91RvDgK9uVIw0EUvMlsp-3pZcSRWHGSE"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
