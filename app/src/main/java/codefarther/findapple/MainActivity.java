@@ -28,6 +28,7 @@ public class MainActivity extends AppCompatActivity {
     private ProgressDialog progressDialog;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        setTheme(R.style.AppTheme);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         etEmail=(EditText)findViewById(R.id.etEmail);
