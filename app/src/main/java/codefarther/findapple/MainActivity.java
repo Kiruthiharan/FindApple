@@ -37,6 +37,15 @@ public class MainActivity extends AppCompatActivity {
         progressDialog=new ProgressDialog(this);
     }
 
+    @Override
+    public void onStart() {
+        super.onStart();
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+        if(currentUser!=null){
+            startActivity(new Intent(this,Home.class));
+        }
+    }
+
     public void signIn(View view) {
         verifyUser();
     }
