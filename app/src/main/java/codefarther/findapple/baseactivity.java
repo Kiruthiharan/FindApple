@@ -10,7 +10,6 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.TextView;
 import android.support.v7.widget.Toolbar;
-import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -50,12 +49,9 @@ public class baseactivity extends AppCompatActivity {
                         // close drawer when item is tapped
                         mDrawerLayout.closeDrawers();
                         String s=menuItem.getTitle().toString();
-                        //Toast.makeText(baseactivity.this, s,
-                                //Toast.LENGTH_SHORT).show();
-                        if(s.equals("Log Out")){
+                        if(s=="Log Out"){
                             mAuth.signOut();
-                            Toast.makeText(baseactivity.this, "logging out",
-                                    Toast.LENGTH_SHORT).show();
+
                             startActivity(intent);
                         }
                         // Add code here to update the UI based on the item selected
