@@ -45,7 +45,6 @@ public class MainActivity extends AppCompatActivity {
         if(currentUser!=null){
             startActivity(new Intent(this,Home.class));
         }
-
     }
 
     public void signIn(View view) {

@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 
 public class PickUserType extends AppCompatActivity {
 
@@ -12,11 +11,7 @@ public class PickUserType extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pick_user_type);
-
-
     }
-
-
 
     public void faReg(View view) {
         Intent intent=new Intent(this,SignUpFA.class);

@@ -9,8 +9,6 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
 import android.widget.TextView;
 import android.support.v7.widget.Toolbar;
 
@@ -35,19 +33,10 @@ public class Home extends baseactivity {
 
         mAuth=FirebaseAuth.getInstance();
         FirebaseUser user=mAuth.getCurrentUser();
-        trackLocation();
+
         //tvwelocme.setText("Welcome" + getIntent().getStringExtra("userName"));
         //tvwelocme.setText("welocme "+user.getEmail());
 
-    }
-    private void trackLocation() {
-        Button trackButton=findViewById(R.id.btnLocation);
-        trackButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(Home.this,MapsActivity.class));
-            }
-        });
     }
 
 }
