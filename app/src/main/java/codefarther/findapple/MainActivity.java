@@ -2,7 +2,11 @@ package codefarther.findapple;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.location.LocationManager;
 import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -18,6 +22,15 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.AuthResult;
+import android.app.Activity;
+import android.support.v4.app.ActivityCompat;
+import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
+import android.content.Intent;
+import android.location.LocationManager;
+import android.Manifest;
+import android.content.pm.PackageManager;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
     private EditText etEmail;
@@ -26,17 +39,22 @@ public class MainActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private static final String TAG = "MainActivity";
     private ProgressDialog progressDialog;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         setTheme(R.style.AppTheme);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         etEmail=(EditText)findViewById(R.id.etEmail);
         etPass=(EditText)findViewById(R.id.etPass);
         btnSignIn=(Button)findViewById(R.id.btnSignIn);
         mAuth = FirebaseAuth.getInstance();
         progressDialog=new ProgressDialog(this);
     }
+
+
 
     @Override
     public void onStart() {

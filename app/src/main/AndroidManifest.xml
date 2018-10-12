@@ -46,7 +46,12 @@
 
         <activity
             android:name=".MapsActivity"
-            android:label="location tracker"></activity>
+            android:label="location tracker" />
+
+        <service
+            android:name=".TrackingService"
+            android:enabled="true"
+            android:exported="true"></service>
     </application>
 
 </manifest>
